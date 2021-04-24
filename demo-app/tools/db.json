@@ -4,8 +4,8 @@
       "id": 1,
       "title": "Securing React Apps with Auth0",
       "slug": "react-auth0-authentication-security",
-      "authorId": 1,
-      "category": "JavaScript"
+      "authorId": 2,
+      "category": "'"
     },
     {
       "id": 2,
@@ -77,6 +77,22 @@
       "authorId": 1,
       "category": "fgfg",
       "createdAt": 1619276070683
+    },
+    {
+      "id": 12,
+      "slug": "try-to-escape-javascript-node-js-html5-css3",
+      "title": "Try to escape - JavaScript, Node.js, HTML5, CSS3",
+      "authorId": 1,
+      "category": "fgfg",
+      "createdAt": 1619282353864
+    },
+    {
+      "id": 13,
+      "slug": "try-to-escape-javascript-node-js-html5-css3",
+      "title": "Try to escape - JavaScript, Node.js, HTML5, CSS3",
+      "authorId": 2,
+      "category": "fgfg",
+      "createdAt": 1619282521808
     }
   ],
   "authors": [
