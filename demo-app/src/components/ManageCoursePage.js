@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Prompt } from "react-router-dom";
+import { Prompt, Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import courseStore from "../stores/courseStore";
 import { toast } from "react-toastify";
@@ -15,11 +15,13 @@ const ManageCoursePage = (props) => {
     authorId: null,
     category: "",
   });
-
+  const [notFound, setNotFound] = useState(false);
   useEffect(() => {
     courseStore.addChangeListener(onChange);
     const slug = props.match.params.slug;
-    if (courseStore.getCourses().length === 0) courseActions.loadCourses();
+
+    if (courseStore.getCourseBySlug(slug) === undefined) setNotFound(true);
+    else if (courseStore.getCourses().length === 0) courseActions.loadCourses();
     else if (slug) {
       setCourse(courseStore.getCourseBySlug(slug));
     }
@@ -54,14 +56,23 @@ const ManageCoursePage = (props) => {
   }
   return (
     <>
-      <h2>Manage Course</h2>
-      <Prompt when={true} message="Are you sure you want to leave?"></Prompt>
-      <CourseForm
-        errors={errors}
-        course={course}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
+      {notFound ? (
+        <Redirect to="/notFound" />
+      ) : (
+        <>
+          <h2>Manage Course</h2>
+          <Prompt
+            when={true}
+            message="Are you sure you want to leave?"
+          ></Prompt>
+          <CourseForm
+            errors={errors}
+            course={course}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+        </>
+      )}
     </>
   );
 };

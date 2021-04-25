@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import authorStore from "../stores/authorsStore";
 
 function CourseList(props) {
   return (
@@ -15,6 +16,8 @@ function CourseList(props) {
       </thead>
       <tbody>
         {props.courses.map((course) => {
+         
+          let name = props.authors.filter( author => author.id === course.authorId)[0].name;
           return (
             <tr key={course.id}>
               <td>
@@ -26,7 +29,7 @@ function CourseList(props) {
               <td>
                 <Link to={"/course/" + course.slug}>{course.title}</Link>
               </td>
-              <td>{course.authorId}</td>
+              <td>{name}</td>
               <td>{course.category}</td>
             </tr>
           );
@@ -44,6 +47,13 @@ CourseList.propTypes = {
       title: PropTypes.string.isRequired,
       authorId: PropTypes.number.isRequired,
       category: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  authors: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    
     })
   ).isRequired,
 };
