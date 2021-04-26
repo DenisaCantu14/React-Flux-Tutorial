@@ -26,7 +26,7 @@ class App extends Component {
           ></link>
         </header>
         <body>
-          <h1>React App</h1>
+          <h1>React App Docker</h1>
           <div className="container">
             <div className="row well mb-3">
               <div className="col-md-3 col-sm-3">
