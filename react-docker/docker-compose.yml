@@ -3,11 +3,14 @@ services:
   redis-server: 
     image: 'redis'
   node-app:
+    restart: on-failure
     build:
       context: ./server
     ports:
       - "8081:8081"
     container_name: api-server
+    volumes:
+      - ./server:/app
   ui:
     build:
       context: ./reactApp
@@ -16,3 +19,13 @@ services:
     stdin_open: true     
     volumes:
       - ./reactApp:/usr/app
+  postgres:
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init-database.sql:/docker-entrypoint-initdb.d/init-database.sql
+    environment : 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+volumes:
+  postgres: 
